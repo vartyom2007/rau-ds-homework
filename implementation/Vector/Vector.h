@@ -13,20 +13,55 @@ private:
     void _resize_capacity(size_t new_capacity);
 
 public:
+    
+    
     /// 1. Конструктор по умолчанию
-    Vector();
+    Vector() : _data(nullptr), _size(0), _capacity(0) {}
     
     /// 2. Конструктор с начальным размером
-    Vector(size_t initial_size);
-    
+    Vector(size_t initial_size) {
+    _size = initial_size;
+    _capacity = initial_size;
+    if(initial_size > 0){
+    _data = new T[initial_size]();
+    else{
+    _data = nullptr;
+    }
     /// 3. Деструктор
-    ~Vector();
+    ~Vector(){
+    delete[] _data;
     
     /// 4. Конструктор копирования
-    Vector(const Vector& other);
-    
+    Vector(const Vector& other){
+    _size = other._size;
+    _capacity = other._capacity;
+    if(_capacity > 0){
+    _data = new T[_capacity];
+    for(size_t i = 0; i < _size; i++){
+    _data[i] = other._data[i];   
+    }
+    }
+    else{
+    _data = nullptr;
+    }
     /// 5. Оператор присваивания
-    Vector& operator=(const Vector& other);
+    Vector& operator=(const Vector& other){
+    if(this != &other){
+    delete[]_data;
+    _size = other._size;
+    _capacity = other._capacity;
+    if(_capacity > 0){
+    _data = new T[_capacity];
+    for(size_t i = 0; i < _size; i++){
+    _data[i] = other._data[i];   
+    }
+    
+    else{
+    _data = nullptr;
+    }
+    return *this;    
+    }     
+    
     
     /// 6. push_back(const T& value) - добавить в конец
     void push_back(const T& value);
