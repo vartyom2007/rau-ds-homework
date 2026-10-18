@@ -24,13 +24,15 @@ public:
     _capacity = initial_size;
     if(initial_size > 0){
     _data = new T[initial_size]();
+    }
     else{
     _data = nullptr;
     }
+}
     /// 3. Деструктор
     ~Vector(){
     delete[] _data;
-    
+    }
     /// 4. Конструктор копирования
     Vector(const Vector& other){
     _size = other._size;
@@ -44,6 +46,7 @@ public:
     else{
     _data = nullptr;
     }
+}
     /// 5. Оператор присваивания
     Vector& operator=(const Vector& other){
     if(this != &other){
@@ -55,10 +58,11 @@ public:
     for(size_t i = 0; i < _size; i++){
     _data[i] = other._data[i];   
     }
-    
+    }
     else{
     _data = nullptr;
     }
+}
     return *this;    
     }     
     
@@ -76,12 +80,15 @@ public:
     _capacity = new_capacity;
     }
     _data[_size] = value;
-    _size++;    
+
+    _size++;
+}
     /// 7. pop_back() - удалить последний элемент
-    void pop_back();
+    void pop_back(){
     if(_size > 0){
         _size--;    
-    /// 8. operator[](size_t index) - доступ по индексу
+   } 
+}/// 8. operator[](size_t index) - доступ по индексу
     T& operator[](size_t index){
     return _data[index];
     }
@@ -91,13 +98,13 @@ public:
     /// 9. at(size_t index) - доступ с проверкой границ
     T& at(size_t index){
         if(index >= _size){
-            throw std::out_of_range;
+            throw std::out_of_range("Index out of range");
         }
         return _data[index];
     }
-    const T& at(size_t index) const;
+    const T& at(size_t index) const{
         if(index >= _size){
-          throw std::out_of_range;
+         throw  std::out_of_range("Index out of range");
         }
         return _data[index];
     }  
@@ -142,7 +149,7 @@ public:
     /// 15. reserve(size_t new_capacity) - выделить память
     void reserve(size_t new_capacity){
     if(new_capacity > _capacity){
-    T* new_data = T* [new_capacity];
+    T* new_data = new T[new_capacity];
     for(size_t i = 0; i < _size; i++){
     new_data[i] = _data[i];
     }
@@ -150,6 +157,7 @@ public:
     _data = new_data;
     _capacity = new_capacity;
     }
+}
     /// 16. clear() - очистить вектор
     void clear(){
     _size = 0;
