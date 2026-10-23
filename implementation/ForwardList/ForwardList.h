@@ -26,8 +26,8 @@ public:
     /// 3. Конструктор копирования
     ForwardList(const ForwardList& other) : _head(nullptr), _size(0){
     if(other._head == nullptr){
-    return;    
-    }
+     return; 
+     } 
     _head = new Node(other._head->data);
     Node* my_car = _head;
     Node* other_car = other._head->next;
@@ -52,8 +52,9 @@ public:
     my_car = my_car->next;
     other_car = other_car->next;
     }
-    _size = other._size;    
     }
+    _size = other._size;    
+    
     }
     return *this;
     }
